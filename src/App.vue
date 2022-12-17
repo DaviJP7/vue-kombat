@@ -1,14 +1,20 @@
 <script>
 import LifeBar from './components/LifeBar.vue'
 import Button from './components/Button.vue'
+import Spinner from './components/Spinner.vue'
 export default {
     components: {
         LifeBar,
-        Button
+        Button,
+        Spinner
     },
     data() {
         return {
             fight_voice: new Audio('../public/songs/battle/fight.mp3'),
+            result_voice: {
+                win: new Audio('../public/songs/battle/win.mp3'),
+                lose: new Audio('../public/songs/battle/lose.mp3')
+            },
             loading: true,
             running: false,
             playerLife: 100,
@@ -27,7 +33,7 @@ export default {
         theme_song.loop = true
         setTimeout(() => {
             this.loading = false
-        }, 3200)
+        }, 4000)
     },
     methods: {
         startGame() {
@@ -58,7 +64,7 @@ export default {
                 '../public/songs/battle/middle-damage.wav',
                 '../public/songs/battle/strong-damage.wav',
             ]
-            new Audio(voices[this.getRandom(0, voices.length)]).play()
+            new Audio(voices[this.getRandom(0, voices.length - 1)]).play()
         },
         hurt(target, min, max, especial) {
             const plus = especial ? 5 : 0;
@@ -82,7 +88,7 @@ export default {
                     document.querySelectorAll('.life')[0].style['border-bottom-right-radius'] = '0'
                 })
             }
-            if (value === 0) new Audio('../public/songs/battle/lose.mp3').play()
+            if (value === 0) this.result_voice.lose.play()
         },
         monsterLife(value) {
             if (value < 100) {
@@ -91,7 +97,7 @@ export default {
                     document.querySelectorAll('.life')[1].style['border-bottom-right-radius'] = '0'
                 })
             }
-            if (value === 0) new Audio('../public/songs/battle/win.mp3').play()
+            if (value === 0) this.result_voice.win.play()
         }
     }
 }
@@ -101,7 +107,10 @@ export default {
     <main>
         <audio src="../public/songs/mkt_theme.mp3" id="music"></audio>
         <div class="loading" v-if="loading">
-            <img src="../public/loading.gif" alt="loading...">
+            <div class="game-logo">
+                <img src="../public/kombat.png" alt="vue-kombat">
+            </div>
+            <Spinner />
         </div>
         <template v-else>
             <div class="fight-content">

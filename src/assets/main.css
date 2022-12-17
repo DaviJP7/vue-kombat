@@ -7,6 +7,19 @@ html {
     user-select: none;
 }
 
+.loading {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-logo {
+    margin-bottom: 200px;
+}
+
+.game-logo img {
+    width: 60px;
+}
+
 main {
     display: flex;
     flex-direction: column;
