@@ -1,5 +1,11 @@
 <script>
+import LifeBar from './components/LifeBar.vue'
+import Button from './components/Button.vue'
 export default {
+    components: {
+        LifeBar,
+        Button
+    },
     data() {
         return {
             loading: true,
@@ -14,9 +20,10 @@ export default {
         }
     },
     mounted() {
-        // const mainSong = new Audio('../public/songs/main-theme.mp3')
-        // mainSong.play()
-        // mainSong.loop = true
+        const theme_song = document.querySelector('#music')
+        theme_song.play()
+        theme_song.volume = 0.5
+        theme_song.loop = true
         setTimeout(() => {
             this.loading = false
         }, 3200)
@@ -26,7 +33,7 @@ export default {
             const figth_fx = document.querySelector('.fight-content')
             const fight_voice = new Audio('../public/songs/battle/fight.mp3')
             fight_voice.play()
-            fight_voice.volume = 0.2
+            fight_voice.volume = 0.5
             setTimeout(() => {
                 figth_fx.classList.add('show')
             }, 500)
@@ -64,9 +71,22 @@ export default {
             if (value) this.running = false;
         },
         playerLife(value) {
+
+            if (value < 100) {
+                setTimeout(() => {
+                    document.querySelectorAll('.life')[0].style['border-top-right-radius'] = '0'
+                    document.querySelectorAll('.life')[0].style['border-bottom-right-radius'] = '0'
+                })
+            }
             if (value === 0) new Audio('../public/songs/battle/lose.mp3').play()
         },
         monsterLife(value) {
+            if (value < 100) {
+                setTimeout(() => {
+                    document.querySelectorAll('.life')[1].style['border-top-right-radius'] = '0'
+                    document.querySelectorAll('.life')[1].style['border-bottom-right-radius'] = '0'
+                })
+            }
             if (value === 0) new Audio('../public/songs/battle/win.mp3').play()
         }
     }
@@ -75,12 +95,13 @@ export default {
 
 <template>
     <main>
+        <audio src="../public/songs/mkt_theme.mp3" id="music"></audio>
         <div class="loading" v-if="loading">
             <img src="../public/loading.gif" alt="loading...">
         </div>
         <template v-else>
             <div class="fight-content">
-                <img src="../public/fight.png" alt="fight" class="fight">
+                <img class="fight" src="../public/fight.png" alt="fight">
             </div>
             <div class="panel scores">
                 <div class="score">
@@ -88,24 +109,16 @@ export default {
                         <img src="../public/characters/mario.gif" alt="zeca">
                         <h1>Zé</h1>
                     </div>
-                    <div class="life-bar">
-                        <div class="life" :class="{ 'danger': playerLife < 20 }" :style="{ width: playerLife + '%' }">
-                        </div>
-                    </div>
-                    <span>{{ playerLife }}%</span>
+                    <LifeBar :life="playerLife" />
                 </div>
                 <div class="score">
                     <div class="character">
                         <img src="../public/characters/bowser.gif" alt="governo">
                         <h1>Governo</h1>
                     </div>
-                    <div class="life-bar">
-                        <div class="life" :class="{ 'danger': monsterLife < 20 }" :style="{ width: monsterLife + '%' }">
-                        </div>
-                    </div>
-                    <span>{{ monsterLife }}%</span>
+                    <LifeBar :life="monsterLife" />
                 </div>
-                <img src="../public/russo.png" alt="" style="position: absolute">
+                <img class="russo" src="../public/russo.png" alt="russo">
             </div>
             <div class="panel result" v-show="hasResult">
                 <div v-if="monsterLife === 0" class="win">Você ganhou!!</div>
@@ -113,16 +126,23 @@ export default {
             </div>
             <div class="panel buttons">
                 <template v-if="running">
-                    <button @click="attack(false)" class="btn attack">
+                    <Button class="btn attack" @click="attack(false)">
                         Ataque
-                    </button>
-                    <button @click="attack(true)" class="btn special-attack">Ataque especial</button>
-                    <button class="btn heal">Curar</button>
-                    <button @click="running = false" class="btn give-up">Desistir</button>
+                    </Button>
+                    <Button @click="attack(true)" class="btn special-attack">
+                        Ataque especial
+                    </Button>
+                    <Button class="btn heal">
+                        Curar
+                    </Button>
+                    <Button @click="running = false" class="btn give-up">
+                        Desistir
+                    </Button>
                 </template>
-                <button v-else class="btn new-game" @click="startGame">Iniciar Jogo</button>
+                <Button v-else class="btn new-game" @click="startGame">
+                    Lutar
+                </Button>
             </div>
-            <!-- <div class="panel logs"></div> -->
         </template>
     </main>
 </template>
@@ -182,5 +202,11 @@ export default {
     width: 50%;
     height: 40%;
     z-index: 10000;
+}
+
+.russo {
+    position: absolute;
+    opacity: .9;
+    filter: contrast(70%);
 }
 </style>
