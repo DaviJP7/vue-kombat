@@ -1,0 +1,115 @@
+html {
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel {
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+}
+
+.scores {
+    display: flex;
+    background-color: #fcfefc;
+}
+
+.score {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.score .character {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.score .character img {
+    width: 498px;
+    height: 394px;
+}
+
+.score h1 {
+    font-weight: 300;
+    font-size: 1.6rem;
+}
+
+.life-bar {
+    width: 80%;
+    height: 20px;
+    border: 1px solid #aaa;
+}
+
+.life-bar .life {
+    height: 100%;
+    background-color: green;
+    transition: 1s all ease-out;
+}
+
+.life-bar .life.danger {
+    background-color: red;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.result .win {
+    color: green;
+}
+
+.result .lose {
+    color: red;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    padding: 5px 10px;
+    margin: 0px 10px;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+.new-game {
+    background-color: #4254af;
+    color: #fff;
+}
+
+.attack {
+    background-color: #e51c23;
+    color: #fff;
+}
+
+.special-attack {
+    background-color: #ff9800;
+    color: #000;
+}
+
+.heal {
+    background-color: #259b24;
+    color: #fff;
+}
+
+.give-up {
+    background-color: #ddd;
+    color: #000;
+}
