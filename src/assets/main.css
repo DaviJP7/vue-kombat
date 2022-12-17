@@ -17,6 +17,18 @@ main {
 .scores {
     display: flex;
     background-color: #fcfefc;
+    background-image: url(../../public/place.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: relative;
+    background-position: 20% 80%;
+    z-index: -1;
+}
+
+.scores>img {
+    top: 30%;
+    left: 40%;
+    width: 150px;
 }
 
 .score {
@@ -25,6 +37,9 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 80px;
 }
 
 .score .character {
@@ -41,6 +56,7 @@ main {
 
 .score h1 {
     font-weight: 300;
+    margin: 5px;
     font-size: 1.6rem;
 }
 
@@ -52,7 +68,7 @@ main {
 
 .life-bar .life {
     height: 100%;
-    background-color: green;
+    background-color: rgb(38, 224, 38);
     transition: 1s all ease-out;
 }
 

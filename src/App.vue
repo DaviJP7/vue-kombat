@@ -14,9 +14,9 @@ export default {
         }
     },
     mounted() {
-        const mainSong = new Audio('../public/songs/main-theme.mp3')
-        mainSong.play()
-        mainSong.loop = true
+        // const mainSong = new Audio('../public/songs/main-theme.mp3')
+        // mainSong.play()
+        // mainSong.loop = true
         setTimeout(() => {
             this.loading = false
         }, 3200)
@@ -96,7 +96,7 @@ export default {
                 </div>
                 <div class="score">
                     <div class="character">
-                        <img src="../public/characters/bower.gif" alt="governo">
+                        <img src="../public/characters/bowser.gif" alt="governo">
                         <h1>Governo</h1>
                     </div>
                     <div class="life-bar">
@@ -105,6 +105,7 @@ export default {
                     </div>
                     <span>{{ monsterLife }}%</span>
                 </div>
+                <img src="../public/russo.png" alt="" style="position: absolute">
             </div>
             <div class="panel result" v-show="hasResult">
                 <div v-if="monsterLife === 0" class="win">Você ganhou!!</div>
@@ -180,6 +181,6 @@ export default {
 .fight {
     width: 50%;
     height: 40%;
-
+    z-index: 10000;
 }
 </style>
