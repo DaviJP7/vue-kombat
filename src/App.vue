@@ -8,6 +8,7 @@ export default {
     },
     data() {
         return {
+            fight_voice: new Audio('../public/songs/battle/fight.mp3'),
             loading: true,
             running: false,
             playerLife: 100,
@@ -31,9 +32,8 @@ export default {
     methods: {
         startGame() {
             const figth_fx = document.querySelector('.fight-content')
-            const fight_voice = new Audio('../public/songs/battle/fight.mp3')
-            fight_voice.play()
-            fight_voice.volume = 0.5
+            this.fight_voice.play()
+            this.fight_voice.volume = 0.5
             setTimeout(() => {
                 figth_fx.classList.add('show')
             }, 500)
@@ -45,6 +45,10 @@ export default {
             setTimeout(() => {
                 figth_fx.classList.remove('show')
             }, 2500)
+            document.querySelectorAll('.life')[0].style['border-top-right-radius'] = '.8rem'
+            document.querySelectorAll('.life')[0].style['border-bottom-right-radius'] = '.8rem'
+            document.querySelectorAll('.life')[1].style['border-top-right-radius'] = '.8rem'
+            document.querySelectorAll('.life')[1].style['border-bottom-right-radius'] = '.8rem'
         },
         attack(especial) {
             this.hurt('monsterLife', 5, 10, false)

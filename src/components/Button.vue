@@ -17,6 +17,7 @@ export default {
     text-transform: uppercase;
     position: relative;
     font-size: 1.1rem;
+    cursor: pointer;
 }
 
 .btn:before,
@@ -57,21 +58,48 @@ export default {
     color: #fff;
 }
 
-.special-attack {
+
+.btn.attack:hover,
+.btn.attack:focus,
+.btn.new-game:hover,
+.btn.new-game:focus {
+    background: #cc0f0f;
+    box-shadow: inset -6px -6px 0px 0px #7c0000;
+}
+
+.btn.special-attack {
     background-color: #ff9800;
     box-shadow: inset -4px -4px 0px 0px #804d01;
     color: #000;
 }
 
-.heal {
+.btn.special-attack:hover,
+.btn.special-attack:focus {
+    background: #da860a;
+    box-shadow: inset -6px -6px 0px 0px #6d4201;
+}
+
+.btn.heal {
     background-color: #259b24;
     box-shadow: inset -4px -4px 0px 0px #026b00;
     color: #fff;
 }
 
-.give-up {
+.btn.heal:focus,
+.btn.heal:hover {
+    background: #126e11;
+    box-shadow: inset -6px -6px 0px 0px #045202;
+}
+
+.btn.give-up {
     background-color: #ddd;
-    box-shadow: inset -4px -4px 0px 0px rgb(146, 146, 146);
+    box-shadow: inset -4px -4px 0px 0px #929292;
     color: #000;
+}
+
+.btn.give-up:focus,
+.btn.give-up:hover {
+    background: #b3b3b3;
+    box-shadow: inset -6px -6px 0px 0px #6b6b6b;
 }
 </style>
