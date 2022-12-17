@@ -122,6 +122,7 @@ export default {
                     </div>
                     <LifeBar :life="monsterLife" />
                 </div>
+                <img class="fly-turtle" src="../public/fly-turtle.gif" alt="fly-turtle">
                 <img class="russo" src="../public/russo.png" alt="russo">
             </div>
             <div class="panel result" v-show="hasResult">
@@ -206,11 +207,5 @@ export default {
     width: 50%;
     height: 40%;
     z-index: 10000;
-}
-
-.russo {
-    position: absolute;
-    opacity: .9;
-    filter: contrast(70%);
 }
 </style>

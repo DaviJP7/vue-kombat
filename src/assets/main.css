@@ -23,21 +23,34 @@ main {
     justify-content: center;
 }
 
-.scores {
+.panel.scores {
+    position: relative;
     display: flex;
     background-color: #fcfefc;
     background-image: url(../../public/place.png);
     background-repeat: no-repeat;
     background-size: 100%;
-    position: relative;
     background-position: 20% 80%;
+    overflow: auto;
     z-index: -1;
 }
 
-.scores>img {
+.scores>img.russo {
     top: 30%;
     left: 40%;
     width: 150px;
+    position: absolute;
+    opacity: .9;
+    filter: contrast(70%);
+}
+
+.scores>img.fly-turtle {
+    position: absolute;
+    width: 50px;
+    left: -4.5em;
+    opacity: .8;
+    filter: contrast(70%);
+    animation: flyturtle 30s infinite linear;
 }
 
 .score {
@@ -82,4 +95,14 @@ main {
 
 .result .lose {
     color: red;
+}
+
+@keyframes flyturtle {
+    0% {
+        transform: translateX(-600px);
+    }
+
+    100% {
+        transform: translateX(2000px);
+    }
 }
