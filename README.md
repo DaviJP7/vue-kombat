@@ -1,9 +1,9 @@
 
 # Vue Kombat
 
-<center>
+<p align="center">
     <img src="./public/kombat.png" width="300">
-</center>
+</p>
 
 ```sh
 npm install
