@@ -1,0 +1,31 @@
+@keyframes playerAttack {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(500px);
+    }
+}
+
+.p-attack {
+    animation: playerAttack 1.6s cubic-bezier(0, 0.5, 0.4, 1);
+}
+
+.slash-hit {
+    display: none;
+    position: absolute;
+    width: 20%;
+    right: 15.8%;
+    filter: sepia(.2);
+    transform: rotate(-40deg);
+    transform: scale(0);
+    transition: 1s transform ease;
+}
+
+.slash-hit.show {
+    display: block;
+    transform: scale(1);
+}

@@ -29,6 +29,7 @@ main {
     margin: 10px;
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+    overflow: hidden;
 }
 
 .panel.buttons {
@@ -55,14 +56,15 @@ main {
     position: absolute;
     opacity: .9;
     filter: contrast(70%);
+    z-index: inherit;
 }
 
 .scores>img.fly-turtle {
     position: absolute;
     width: 50px;
     left: -4.5em;
-    opacity: .8;
-    filter: contrast(70%);
+    opacity: .9;
+    filter: contrast(80%);
     animation: flyturtle 30s infinite linear;
 }
 
@@ -116,6 +118,6 @@ main {
     }
 
     100% {
-        transform: translateX(2000px);
+        transform: translateX(1600px);
     }
 }

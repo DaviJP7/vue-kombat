@@ -15,10 +15,15 @@ export default {
                 win: new Audio('../public/songs/battle/win.mp3'),
                 lose: new Audio('../public/songs/battle/lose.mp3')
             },
+            attacking: false,
             loading: true,
             running: false,
             playerLife: 100,
-            monsterLife: 100
+            monsterLife: 100,
+            golpes: {
+                weak: new Audio('../public/songs/battle/weak-attack.mp3'),
+                strong: new Audio('../public/songs/battle/strong-attack.mp3'),
+            }
         }
     },
     computed: {
@@ -33,7 +38,7 @@ export default {
         theme_song.loop = true
         setTimeout(() => {
             this.loading = false
-        }, 4000)
+        }, 3500)
     },
     methods: {
         startGame() {
@@ -57,14 +62,34 @@ export default {
             document.querySelectorAll('.life')[1].style['border-bottom-right-radius'] = '.8rem'
         },
         attack(especial) {
-            this.hurt('monsterLife', 5, 10, false)
-            this.hurt('playerLife', 7, 12, especial)
-            const voices = [
-                '../public/songs/battle/weak-damage.wav',
-                '../public/songs/battle/middle-damage.wav',
-                '../public/songs/battle/strong-damage.wav',
-            ]
-            new Audio(voices[this.getRandom(0, voices.length - 1)]).play()
+            // AWAIT ATTACK
+            if (!this.attacking) {
+                this.attacking = true
+                var self = this
+                document.querySelector('.player img').classList.add('p-attack')
+                if (especial) this.golpes.strong.play()
+                else this.golpes.weak.play()
+                setTimeout(() => {
+                    document.querySelector('img.slash-hit').classList.add('show')
+                }, 600)
+                setTimeout(() => {
+                    document.querySelector('img.slash-hit').classList.remove('show')
+                }, 800)
+                setTimeout(function () {
+                    document.querySelector('.player img').classList.remove('p-attack')
+                    self.attacking = false
+                }, 1600)
+
+
+                this.hurt('monsterLife', 5, 10, false)
+                this.hurt('playerLife', 7, 12, especial)
+                const voices = [
+                    '../public/songs/battle/weak-damage.wav',
+                    '../public/songs/battle/middle-damage.wav',
+                    '../public/songs/battle/strong-damage.wav',
+                ]
+                new Audio(voices[Math.floor(Math.random() * voices.length - 1)]).play()
+            }
         },
         hurt(target, min, max, especial) {
             const plus = especial ? 5 : 0;
@@ -118,16 +143,17 @@ export default {
             </div>
             <div class="panel scores">
                 <div class="score">
-                    <div class="character">
+                    <div class="character player">
                         <img src="../public/characters/mario.gif" alt="zeca">
                         <h1>Zé</h1>
                     </div>
                     <LifeBar :life="playerLife" />
                 </div>
                 <div class="score">
-                    <div class="character">
+                    <img class="slash-hit" src="../public/effects/hit.png" alt="hit">
+                    <div class="character boss">
                         <img src="../public/characters/bowser.gif" alt="governo">
-                        <h1>Governo</h1>
+                        <h1>Boss</h1>
                     </div>
                     <LifeBar :life="monsterLife" />
                 </div>
@@ -140,7 +166,7 @@ export default {
             </div>
             <div class="panel buttons">
                 <template v-if="running">
-                    <Button class="btn attack" @click="attack(false)">
+                    <Button class="btn attack" :disabled="attacking" @click="attack(false)">
                         Ataque
                     </Button>
                     <Button @click="attack(true)" class="btn special-attack">
